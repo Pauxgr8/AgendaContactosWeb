@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true"
+    Async="true"
     CodeBehind="EditarContacto.aspx.cs"
     Inherits="AgendaContactosWeb.Views.EditarContacto" %>
  
