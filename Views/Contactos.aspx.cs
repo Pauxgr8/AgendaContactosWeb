@@ -41,27 +41,33 @@ namespace AgendaContactosWeb.Views
         {
             Response.Redirect("EditarContacto.aspx");
         }
-
         protected async void gvContactos_RowCommand(
-            object sender,
-            GridViewCommandEventArgs e)
+                    object sender,
+                    GridViewCommandEventArgs e)
         {
             try
             {
                 int id = Convert.ToInt32(e.CommandArgument);
 
-                if (e.CommandName == "EditarContacto")
+                // EDITAR
+                if (e.CommandName == "Editar")
                 {
                     Response.Redirect(
-                        "EditarContacto.aspx?id=" + id);
+                        "EditarContacto.aspx?id=" + id,
+                        false
+                    );
+
+                    Context.ApplicationInstance.CompleteRequest();
+                    return;
                 }
 
-                if (e.CommandName == "EliminarContacto")
+                // ELIMINAR
+                if (e.CommandName == "Eliminar")
                 {
-                    bool resultado =
+                    bool eliminado =
                         await _apiService.EliminarContactoAsync(id);
 
-                    if (resultado)
+                    if (eliminado)
                     {
                         lblMensaje.Text =
                             "Contacto eliminado correctamente.";
